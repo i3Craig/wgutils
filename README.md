@@ -31,6 +31,8 @@ In order to run the script, the following tasks must be completed.
    Use `ip addr` (and look for your IP address) to know which device to use.
    As a side note, interfaces that start with `e` indicate that they are wired (Ethernet)
    and interfaces that start with `w` indicate that they are wireless (WIFI).
+   Below is an example, where the username is bob.
+   `./wg-add-client.sh bob`
 
 3. Follow the instructions printed out. This will probably include restarting the server
    with `sudo systemctl restart wg-quick@wg0.service` and sending the generated client
