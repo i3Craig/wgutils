@@ -104,6 +104,14 @@ if [ -z "$1" ] ; then
   echo ""
 fi # if $1 is empty
 
+# Ensure that we are running as root
+if [ "$EUID" -ne 0 ] ; then
+  echo "This script needs to be run as root."
+  echo "Please use 'sudo' to run this script or log in as root and run."
+  echo ""
+fi # If not running as root
+
+
 # ensure the server is set up
 
 # check that ip forwarding is enabled.
