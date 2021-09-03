@@ -5,7 +5,7 @@ The script `wg-add-client.sh` does all the work. Run it to add a new client to t
 If the server has not been configured yet, then the server will be set up automatically.
 
 The server will be configured to support both IPv4 and IPv6 and will give clients
-full access to the network that the server is hosted on.
+full access to the network that the server is hosted on, behind a NAT created by this script.
 This means, for instance, that setting up a server in your LAN, you can 
 remote desktop into your PC from outside of your LAN.
 Also, all internet traffic will be sent through your VPN server, by default.

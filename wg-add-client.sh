@@ -82,6 +82,10 @@ U_NAME="id_wg.pub"
 # we export this var so that malloc-tap.sh can use it to know where to store/load the counter vars.
 export TAP_STORE="$WG_DIR"
 
+
+# pull in the directory of this script so we can run malloc-tap.sh (which is in the same dir).
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # MAIN LOGIC
 
 # Print copyright
@@ -91,6 +95,14 @@ echo "This program comes with ABSOLUTELY NO WARRANTY; for details type 'show w'.
 echo "This is free software, and you are welcome to redistribute it"
 echo "under certain conditions; type 'show c' for details."
 echo ""
+
+# Ensure that the input parameters were provided
+if [ -z "$1" ] ; then
+  echo "No user name was provided."
+  echo "Please decide on a user name to add to this WireGuard server pass it in like this:"
+  echo ">  ./wg-add-user.sh myUserName"
+  echo ""
+fi # if $1 is empty
 
 # ensure the server is set up
 
@@ -163,8 +175,8 @@ S_PUBL_KEY=$(cat "$WG_DIR/$U_NAME")
   
   
   # generate ipv4 and ipv6 addrs (use - to get just the number).
-  IPV4_ADDR="192.168.1.$(./malloc-tap.sh wg-ipv4 -)"
-  IPV6_ADDR="fd42:42:42::$(./malloc-tap.sh wg-ipv6 -)"
+  IPV4_ADDR="192.168.1.$($SCRIPT_DIR/malloc-tap.sh wg-ipv4 -)"
+  IPV6_ADDR="fd42:42:42::$($SCRIPT_DIR/malloc-tap.sh wg-ipv6 -)"
   
   # generate public and private private key
   wg genkey | tee $R_NAME | wg pubkey > $U_NAME
