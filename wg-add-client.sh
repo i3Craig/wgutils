@@ -102,6 +102,7 @@ if [ -z "$1" ] ; then
   echo "Please decide on a user name to add to this WireGuard server pass it in like this:"
   echo ">  ./wg-add-user.sh myUserName"
   echo ""
+  exit
 fi # if $1 is empty
 
 # Ensure that we are running as root
@@ -109,6 +110,7 @@ if [ "$EUID" -ne 0 ] ; then
   echo "This script needs to be run as root."
   echo "Please use 'sudo' to run this script or log in as root and run."
   echo ""
+  exit
 fi # If not running as root
 
 
